@@ -69,7 +69,6 @@ public class ClearWebSpiderController {
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
         controller.addSeed("https://www.reddit.com/r/onions/");
         controller.addSeed("https://www.reddit.com/r/deepweb/");
-        controller.addSeed("https://www.reddit.com/r/DarkWebLinks/");
         return controller;
     }
 
