@@ -23,7 +23,7 @@ public class DarkWebCrawler extends WebCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DarkWebCrawler.class);
 
-    private final static Pattern ONION_LINK_PATTERN = Pattern.compile("[2-7|a-z]{16}\\.onion");
+    private final static Pattern ONION_LINK_PATTERN = Pattern.compile("([2-7|a-z]{16}\\.onion)|([2-7|a-z]{56}\\.onion)");
 
     private ElasticsearchService elasticsearchService;
     private OnionLinksFoundOnDarkWebService onionLinksFoundOnDarkWebService;

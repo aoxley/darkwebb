@@ -41,7 +41,7 @@ public class WhenMatchingOnionLinksTest {
     }
 
     @Test
-    public void shouldFindSingleOnionLink() {
+    public void shouldFindSingleVersion2OnionLink() {
         final String pageText = "I made this new service: http://besthqdirnimrgpj.onion/ check it out!";
         when(parseData.getText()).thenReturn(pageText);
         when(page.getParseData()).thenReturn(parseData);
@@ -53,5 +53,20 @@ public class WhenMatchingOnionLinksTest {
 
         verify(onionLinksFoundOnClearWebService).save(savingOnionLinkCaptor.capture());
         assertThat(savingOnionLinkCaptor.getValue().getOnionUrl(), is("besthqdirnimrgpj.onion"));
+    }
+
+    @Test
+    public void shouldFindSingleVersion3OnionLink() {
+        final String pageText = "I made this new service: http://jfu5k3iu5njfu5k3iu5njfu5k3iu5njfu5k3iu5njfu5k3iu5nq23wqs.onion/ check it out!";
+        when(parseData.getText()).thenReturn(pageText);
+        when(page.getParseData()).thenReturn(parseData);
+        WebURL webURL = new WebURL();
+        webURL.setURL("http://pageOnionLinkWasFoundOn.com");
+        when(page.getWebURL()).thenReturn(webURL);
+
+        clearWebCrawler.visit(page);
+
+        verify(onionLinksFoundOnClearWebService).save(savingOnionLinkCaptor.capture());
+        assertThat(savingOnionLinkCaptor.getValue().getOnionUrl(), is("jfu5k3iu5njfu5k3iu5njfu5k3iu5njfu5k3iu5njfu5k3iu5nq23wqs.onion"));
     }
 }

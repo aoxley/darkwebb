@@ -53,4 +53,43 @@ public class WhenDeterminingIfCrawlerShouldVisitLinkTest {
 
         assertTrue(darkWebCrawler.shouldVisit(referringPage, possibleUrlToVisit));
     }
+
+    @Test
+    public void shouldNotVisitPageAsTheLinkIsNotAnOnionLink() {
+        Page referringPage = mock(Page.class);
+        WebURL referringUrl = new WebURL();
+        referringUrl.setURL("http://3g2upl4pq6kufc4m.com/index");
+        when(referringPage.getWebURL()).thenReturn(referringUrl);
+
+        WebURL possibleUrlToVisit = new WebURL();
+        possibleUrlToVisit.setURL("http://google.com/sub/directory");
+
+        assertFalse(darkWebCrawler.shouldVisit(referringPage, possibleUrlToVisit));
+    }
+
+    @Test
+    public void shouldVisitPageAsUrlIsVersion2OnionUrl() {
+        Page referringPage = mock(Page.class);
+        WebURL referringUrl = new WebURL();
+        referringUrl.setURL("http://f74jkyi76ehfj6ku.onion/index");
+        when(referringPage.getWebURL()).thenReturn(referringUrl);
+
+        WebURL possibleUrlToVisit = new WebURL();
+        possibleUrlToVisit.setURL("http://qwdg3h4j5uydf3gr.onion");
+
+        assertTrue(darkWebCrawler.shouldVisit(referringPage, possibleUrlToVisit));
+    }
+
+    @Test
+    public void shouldVisitPageAsUrlIsVersion3OnionUrl() {
+        Page referringPage = mock(Page.class);
+        WebURL referringUrl = new WebURL();
+        referringUrl.setURL("http://1jgk6iu4g31jgk6iu4g31jgk6iu4f41jgk6iu4g31jgk6iu4g3hgjtty.onion/index");
+        when(referringPage.getWebURL()).thenReturn(referringUrl);
+
+        WebURL possibleUrlToVisit = new WebURL();
+        possibleUrlToVisit.setURL("http://ppppqh44jtpjrpqh44jtpl7pqh44jtpqweqh44jtpasdfh44jtrhgj66.onion");
+
+        assertTrue(darkWebCrawler.shouldVisit(referringPage, possibleUrlToVisit));
+    }
 }

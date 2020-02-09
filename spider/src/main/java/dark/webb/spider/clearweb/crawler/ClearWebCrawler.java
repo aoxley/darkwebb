@@ -23,7 +23,7 @@ public class ClearWebCrawler extends WebCrawler {
 
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz))$");
 
-    private final Pattern ONION_LINK_PATTERN = Pattern.compile("[2-7|a-z]{16}\\.onion");
+    private final Pattern ONION_LINK_PATTERN = Pattern.compile("([2-7|a-z]{16}\\.onion)|([2-7|a-z]{56}\\.onion)");
     private Matcher onionLinkMatcher = ONION_LINK_PATTERN.matcher("");
 
 
